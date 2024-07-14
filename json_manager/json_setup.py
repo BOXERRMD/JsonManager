@@ -4,12 +4,13 @@ from json_attributdict import AttributDict
 class setup():
 
 
+
     def __init__(self, paths: dict[str: str], encode: str = 'utf-8', newline: str = ''):
 
+        self._proprietes_dynamiques = {}
         self.paths = paths
         self.encode = encode
         self.newline = newline
-        self._proprietes_dynamiques = {}
 
         for i in paths.keys():
             self.__load_json(i, paths[i])
@@ -19,7 +20,7 @@ class setup():
         with open('../'+path_, 'r', encoding=self.encode, newline=self.newline, errors='ignore') as f:
             file = json.load(f)
 
-            self._proprietes_dynamiques[name] = file
+            self._proprietes_dynamiques[name] = AttributDict(file)
 
 
     def __getattr__(self, key):
@@ -29,10 +30,6 @@ class setup():
             return self._proprietes_dynamiques[key]
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
 
-    def __setattr__(self, key, value):
-        if key in self._proprietes_dynamiques:
-            self._proprietes_dynamiques[key] = value
-        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{key}'")
 
     def __delattr__(self, item):
         if item in self._proprietes_dynamiques:
@@ -40,11 +37,12 @@ class setup():
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{item}'")
 
 
+    def write(self):
 
+        for i in self.paths.keys():
 
+            with open('../'+self.paths[i], 'w', encoding=self.encode, newline=self.newline, errors='ignore') as f:
+                json.dump(self._proprietes_dynamiques[i], f, indent=2)
 
-
-
-aqf = setup({'test': 'tests/test.json'})
-
+        return True
 

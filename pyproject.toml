@@ -1,28 +1,4 @@
 [build-system]
-requires=["setuptools>=68.2"]
+requires=["setuptools>=42"]
 build-backend="setuptools.build_meta"
 
-[project]
-name = "json-manager"
-version = "0.0.1"
-authors = [
-  { name="BOXER", email="vagabonwalybi@gmail.com" },
-]
-description = "Data json manager"
-readme = "README.md"
-license = {file = "LICENSE"}
-requires-python = ">=3.11"
-classifiers = [
-    "Programming Language :: Python :: 3.11",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Natural Language :: English",
-    "Operating System :: Microsoft :: Windows :: Windows 11"
-]
-dependencies = ["json"]
-keywords = ["json", "manage", "managment"]
-
-[project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
-Repository = "https://github.com/BOXERRMD/JsonManager"
