@@ -1,1 +1,1 @@
-from json_setup import setup
+from .json_setup import setup

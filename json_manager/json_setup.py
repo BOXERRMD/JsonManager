@@ -1,5 +1,5 @@
 import json
-from json_attributdict import AttributDict
+from .json_attributdict import AttributDict
 
 class setup():
 
