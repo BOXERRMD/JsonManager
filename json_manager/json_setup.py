@@ -1,4 +1,6 @@
 import json
+import os
+
 from .json_attributdict import AttributDict
 
 class setup():
@@ -17,7 +19,15 @@ class setup():
 
 
     def __load_json(self, name, path_):
-        with open('../'+path_, 'r', encoding=self.encode, newline=self.newline, errors='ignore') as f:
+
+        if not os.path.isabs(path_):
+            # Conserver le chemin relatif à l'utilisateur
+            file_path = os.path.join(os.getcwd(), path_)
+        else:
+            # Utiliser directement le chemin absolu
+            file_path = path_
+
+        with open(file_path, 'r', encoding=self.encode, newline=self.newline, errors='ignore') as f:
             file = json.load(f)
 
             self._proprietes_dynamiques[name] = AttributDict(file)
@@ -41,7 +51,14 @@ class setup():
 
         for i in self.paths.keys():
 
-            with open('../'+self.paths[i], 'w', encoding=self.encode, newline=self.newline, errors='ignore') as f:
+            if not os.path.isabs(self.paths[i]):
+                # Conserver le chemin relatif à l'utilisateur
+                file_path = os.path.join(os.getcwd(), self.paths[i])
+            else:
+                # Utiliser directement le chemin absolu
+                file_path = self.paths[i]
+
+            with open(file_path, 'w', encoding=self.encode, newline=self.newline, errors='ignore') as f:
                 json.dump(self._proprietes_dynamiques[i], f, indent=2)
 
         return True

@@ -5,7 +5,7 @@ with open("README.md", "rt") as file:
 
 setuptools.setup(
     name='json-manager2.0',
-    version='1.0.0',
+    version='1.0.1',
     author='BOXERRMD',
     author_email='vagabonwalybi@gmail.com',
     description='An json manager',
@@ -28,6 +28,6 @@ setuptools.setup(
     ],
 
     packages=['json_manager'],
-    python_requires=">=3",
+    python_requires=">=3.9",
     include_package_data=True,
 )

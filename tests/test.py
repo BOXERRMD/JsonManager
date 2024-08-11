@@ -1,7 +1,7 @@
 from json_manager import setup
 
 
-data = setup({'test': 'tests/test.json'})
+data = setup({'test': 'test.json'})
 
 print(data.test.hello.rrrr.bon)
 
