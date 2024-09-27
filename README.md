@@ -25,7 +25,7 @@ print(data.file_1.my_data)
 #output : the value from the key "my_data"
 
 
-'''Write all files to save data'''
+'''Write all files to save data excepted if files have any changement'''
 data.write()
 #This will rewrite all the files with their new data located in "data".
 ```
