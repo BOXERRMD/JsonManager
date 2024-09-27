@@ -10,7 +10,7 @@ __Made by BOXER__
 from json_manager import setup
 
 #setup your files
-data = setup({'file_1': {'directory/myfile_1.json'},
+data = setup({'file_1': 'directory/myfile_1.json',
               'file_2': 'directory/sub_directory/myfile_2.json'})
 
 #print data files
