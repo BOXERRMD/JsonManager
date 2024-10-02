@@ -22,7 +22,6 @@ class setup():
 
         for i in paths.keys():
             self.__load_json(i, paths[i])
-        print(self.__proprietes_dynamiques)
 
 
     def __read_file(self, file_path):
