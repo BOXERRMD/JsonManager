@@ -70,7 +70,6 @@ class setup():
                 file_path = self.paths[i]
 
             if self.__read_file(file_path) == self.__proprietes_dynamiques[i]:
-                print('pass')
                 pass
 
             else:
