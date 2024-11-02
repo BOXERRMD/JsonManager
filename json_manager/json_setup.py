@@ -57,17 +57,26 @@ class setup():
             del self.__proprietes_dynamiques[item]
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{item}'")
 
+    def __get_path(self, _path: str)->str:
+        """
+        Renvoie le chemin complet
+        :param _path: un chemin d'accès
+        :return:
+        """
+        if not path.isabs(_path):
+            # Conserver le chemin relatif à l'utilisateur
+            return path.join(getcwd(), _path)
 
-    def write(self):
+        return _path
 
+    def write(self)->None:
+        """
+        Write all files if a modification is detected.
+        :return: None
+        """
         for i in self.paths.keys():
 
-            if not path.isabs(self.paths[i]):
-                # Conserver le chemin relatif à l'utilisateur
-                file_path = path.join(getcwd(), self.paths[i])
-            else:
-                # Utiliser directement le chemin absolu
-                file_path = self.paths[i]
+            file_path = self.__get_path(self.paths[i])
 
             if self.__read_file(file_path) == self.__proprietes_dynamiques[i]:
                 pass
@@ -76,5 +85,4 @@ class setup():
                 with open(file_path, 'w', encoding=self.encode, newline=self.newline, errors='ignore') as f:
                     dump(self.__proprietes_dynamiques[i], f, indent=2)
 
-        return True
 
