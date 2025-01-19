@@ -24,14 +24,39 @@ class setup():
             self.__load_json(i, paths[i])
 
 
+    def add_file(self, name: str, path: str) -> None:
+        """
+        Add files append to init paths files
+        :param name: the name to find the file (attribute) in the setup class
+        :param path: the path (absolute or not)
+        :return: None
+        """
+        self.__load_json(name, path)
+
+
+    def delete_files(self, *names: str) -> None:
+        """
+        Delete all charged file in the class
+        :param names: names given to files in the init or with add_file function
+        :return: None
+        """
+        for name in names:
+            self.__unload_json(name)
+
+
+
     def __read_file(self, file_path):
         with open(file_path, 'r', encoding=self.encode, newline=self.newline, errors='ignore') as f:
             file = load(f)
             return file
 
-    def __load_json(self, name, path_):
-        global file_path
-
+    def __load_json(self, name: str, path_: str):
+        """
+        Load json file in the class
+        :param name: the name associated to the file
+        :param path_: the json file path
+        :return:
+        """
         if not path.isabs(path_):
             # Conserver le chemin relatif à l'utilisateur
             file_path = path.join(getcwd(), path_)
@@ -42,6 +67,18 @@ class setup():
         file = self.__read_file(file_path=file_path)
 
         self.__proprietes_dynamiques[name] = AttributDict(file)
+
+
+    def __unload_json(self, name: str) -> None:
+        """
+        Unload json file in the class
+        :param name: the name associated to the file
+        :return: None
+        """
+        if name not in self.__proprietes_dynamiques.keys():
+            raise NameError(f"'{name}' file not found !")
+
+        del self.__proprietes_dynamiques[name]
 
 
     def __getattr__(self, key):
